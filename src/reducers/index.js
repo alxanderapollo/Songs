@@ -1,3 +1,5 @@
+import{combineReducers} from 'redux'
+
 //static list of songs
 const songsReducer = () => {
     return [
@@ -9,8 +11,15 @@ const songsReducer = () => {
 }
 // has a default val of null
 const selectedSongReducer = (selectedSong = null, action) => {
+    //wrote this with the assumption that we may have other action creators,
     if (action.type == 'SONG_SELECTED') return action.payload;
 
     return selectedSong;
-
 };
+
+// exported so any file in our project can now get access to our combined reducers
+//the keys of this object are the keys that show up in the state object
+export default combineReducers({
+    songs: SongsReducer,
+    selectedSong: selectedSongReducer
+});
