@@ -20,6 +20,6 @@ const selectedSongReducer = (selectedSong = null, action) => {
 // exported so any file in our project can now get access to our combined reducers
 //the keys of this object are the keys that show up in the state object
 export default combineReducers({
-    songs: SongsReducer,
+    songs: songsReducer,
     selectedSong: selectedSongReducer
 });
