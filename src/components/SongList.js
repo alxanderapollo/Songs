@@ -16,8 +16,34 @@ import {connect} from 'react-redux';
 //this syntax calls on the react component lib
 //couldve been written as songList Extends Component but if you do it this way you need to import {Component}
 class SongList extends React.Component {
+    renderList(){
+        //inner fucntio that called with each song object inside of this array
+        //will reaturn some jsx that use some of the properties inside
+        //the map will create a brand new array of jsx elements, the array will be returned from the render list elements
+        return this.props.songs.map((song) =>{
+            // the inner returns jsx for the map function 
+            return (
+                // key is optional, recomended for when building out a list of elts
+                <div className="item" key={song.title}>
+                    {/* everything that will go to the right */}
+                    <div className="right floated content">
+                        <button className="ui button primary">
+                            Select
+                        </button>
+                    </div>
+                    {/* button */}
+                    <div className="content">
+                        {song.title}
+                    </div>
+                </div>
+            );
+
+        });
+    }
     render(){
-        return <div>SongList</div>
+        return <div className="ui divided list">
+            {this.renderList()}
+        </div>
     }
 }
 //gets called with all of the state inside of our redux store 
@@ -27,7 +53,7 @@ class SongList extends React.Component {
 //songs will passed up as props to the connect component
 //which will then be passed to SongsList
 const mapStateToProps = (state) => {
-    console.log(this.props)
+    //console.log(this.props)
    return{songs: state.songs}
 }
 //syntax: the first set connect() returns a function
