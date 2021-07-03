@@ -13,6 +13,9 @@ import React from 'react';
 //pass it in the two functions
 import {connect} from 'react-redux';
 
+//action -index js file 
+import {selectSong} from '../actions'
+
 //this syntax calls on the react component lib
 //couldve been written as songList Extends Component but if you do it this way you need to import {Component}
 class SongList extends React.Component {
@@ -27,7 +30,12 @@ class SongList extends React.Component {
                 <div className="item" key={song.title}>
                     {/* everything that will go to the right */}
                     <div className="right floated content">
-                        <button className="ui button primary">
+                        <button 
+                        className="ui button primary"
+                        // calls the song that was selected
+                        //goes into the function and returns inforatmion about the song through the console log in mapsStateToProp
+                        onClick={() => this.props.selectSong(song)}
+                        >
                             Select
                         </button>
                     </div>
@@ -41,6 +49,7 @@ class SongList extends React.Component {
         });
     }
     render(){
+        console.log(this.props)
         return <div className="ui divided list">
             {this.renderList()}
         </div>
@@ -53,11 +62,12 @@ class SongList extends React.Component {
 //songs will passed up as props to the connect component
 //which will then be passed to SongsList
 const mapStateToProps = (state) => {
-    //console.log(this.props)
+    console.log(state)
    return{songs: state.songs}
 }
 //syntax: the first set connect() returns a function
 //the second set connect(SongList) invokes the function
 //mapStateToProps gets passed as the first argument down here
 //which then SongList recives as props
-export default connect(mapStateToProps)(SongList);
+//select song is our action
+export default connect(mapStateToProps,{selectSong:selectSong})(SongList);
