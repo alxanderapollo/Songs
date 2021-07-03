@@ -1,3 +1,4 @@
+//this is our reducers file
 import{combineReducers} from 'redux'
 
 //static list of songs
