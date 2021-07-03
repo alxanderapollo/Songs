@@ -18,6 +18,9 @@ import {selectSong} from '../actions'
 
 //this syntax calls on the react component lib
 //couldve been written as songList Extends Component but if you do it this way you need to import {Component}
+//React lets you define components as classes or functions. Components defined as classes currently provide more 
+//features which are described in detail on this page. To define a React component class, you need to 
+//extend React.Component
 class SongList extends React.Component {
     renderList(){
         //inner fucntio that called with each song object inside of this array
@@ -49,7 +52,7 @@ class SongList extends React.Component {
         });
     }
     render(){
-        console.log(this.props)
+        //console.log(this.props) //proves that our state is being updated each time
         return <div className="ui divided list">
             {this.renderList()}
         </div>
@@ -69,5 +72,9 @@ const mapStateToProps = (state) => {
 //the second set connect(SongList) invokes the function
 //mapStateToProps gets passed as the first argument down here
 //which then SongList recives as props
-//select song is our action
-export default connect(mapStateToProps,{selectSong:selectSong})(SongList);
+//select song is our action creator
+//the fnctions here are being passed and wrapped around another function called connect
+//in this project there is no explicit dispatch, our connect function is behaving like dispatch 
+//it updates the store so to speak autmaticcaly for us when we pass in action creators
+export default connect(mapStateToProps,
+    {selectSong:selectSong})(SongList);
